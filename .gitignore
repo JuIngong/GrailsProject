@@ -1,5 +1,5 @@
 
-# Created by https://www.gitignore.io/api/gradle,grails,intellij+iml
+# Created by https://www.gitignore.io/api/gradle,grails,intellij+all
 
 ### Grails ###
 # .gitignore for Grails 1.2 and 1.3
@@ -36,7 +36,7 @@
 # "temporary" build files
 /target
 
-### Intellij+iml ###
+### Intellij+all ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
@@ -87,13 +87,11 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-### Intellij+iml Patch ###
-# Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
+### Intellij+all Patch ###
+# Ignores the whole idea folder
+# See https://github.com/joeblau/gitignore.io/issues/186 and https://github.com/joeblau/gitignore.io/issues/360
 
-*.iml
-modules.xml
-.idea/misc.xml
-*.ipr
+.idea/
 
 ### Gradle ###
 .gradle
@@ -111,4 +109,4 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 
-# End of https://www.gitignore.io/api/gradle,grails,intellij+iml
+# End of https://www.gitignore.io/api/gradle,grails,intellij+all
