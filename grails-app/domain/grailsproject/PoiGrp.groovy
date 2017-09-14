@@ -3,8 +3,8 @@ package grailsproject
 class PoiGrp {
 
     String name
+    Image image
 
-    static hasOne = [image:Image]
     static hasMany = [pois:Poi]
 
     static constraints = {

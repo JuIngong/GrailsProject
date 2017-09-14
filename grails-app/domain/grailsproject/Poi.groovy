@@ -4,9 +4,10 @@ class Poi {
 
     String name
     String desc
+    User user
 
     static hasMany = [images:Image]
-    static hasOne = [location:Location, user:User]
+    static hasOne = [location:Location]
 
     static constraints = {
     }
