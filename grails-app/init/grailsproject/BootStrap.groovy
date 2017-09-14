@@ -16,14 +16,20 @@ class BootStrap {
             UserRole.create(modoInstance, roleModo, true)
             UserRole.create(adminInstance, roleAdmin, true)
 
-            def poiGrp = new PoiGrp(name: 'test', image: new Image(fileName:  'test')).save()
-            def loc = new Location(lat:12, lon: 13, adresse: 'te', cp: '04', ville: 'ee').save()
-            def poi = new Poi(name: 'test', desc: 'testd', user: userInstance, location: loc)
-            .addToImages(new Image(fileName: 'testeee')).save()
-            poiGrp.addToPois(poi).save()
+            def listPoiGrp = []
+
+            (1..3).each {listPoiGrp.add(new PoiGrp(name: 'groupe'+it, image: new Image(fileName: 'illustration'+it)).save())}
+            listPoiGrp.each {PoiGrp grp ->
+                (1..5).each {
+                    def poi = new Poi(name: 'poi '+it, desc: 'desc '+it, user: adminInstance,
+                            location: new Location(lat: 12, lon: 13, adresse: 'te', cp: '04', ville: 'ee'))
+                            .addToImages(new Image(fileName: 'testeee '+ it))
+                    grp.addToPois(poi).save()
+                }
+
+            }
 
         }
-
 
     }
     def destroy = {
