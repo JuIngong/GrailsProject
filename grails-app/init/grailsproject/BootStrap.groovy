@@ -15,6 +15,7 @@ class BootStrap {
             UserRole.create(userInstance, roleUser, true)
             UserRole.create(modoInstance, roleModo, true)
             UserRole.create(adminInstance, roleAdmin, true)
+
         }
     }
     def destroy = {
