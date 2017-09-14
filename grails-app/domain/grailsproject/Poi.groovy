@@ -7,7 +7,8 @@ class Poi {
     User user
     Location location
 
-    static hasMany = [images:Image]
+    static hasMany = [images:Image, poiGrp:PoiGrp]
+    static belongsTo = PoiGrp
 
     static constraints = {
     }

@@ -3,10 +3,11 @@ package grailsproject
 class PoiGrp {
 
     String name
-    Image image
 
     static hasMany = [pois:Poi]
+    static belongsTo = [image : Image]
 
     static constraints = {
+        pois nullable: true
     }
 }
