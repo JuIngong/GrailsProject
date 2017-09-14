@@ -136,8 +136,8 @@
     <orderEntry type="library" scope="RUNTIME" name="Gradle: xalan:xalan:2.7.2" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-context-support:4.3.9.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.grails:grails-web-databinding:3.3.0" level="project" />
-    <orderEntry type="library" name="Gradle: org.grails:grails-web-url-mappings:3.3.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apache.commons:commons-lang3:3.4" level="project" />
+    <orderEntry type="library" name="Gradle: org.grails:grails-web-url-mappings:3.3.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apache.httpcomponents:httpmime:4.5.3" level="project" />
     <orderEntry type="library" name="Gradle: org.grails:grails-web-mvc:3.3.0" level="project" />
     <orderEntry type="library" name="Gradle: org.grails:grails-web-gsp:3.3.0" level="project" />
@@ -152,8 +152,8 @@
     <orderEntry type="library" scope="RUNTIME" name="Gradle: commons-io:commons-io:2.4" level="project" />
     <orderEntry type="library" name="Gradle: org.codehaus.groovy:groovy-sql:2.4.11" level="project" />
     <orderEntry type="library" name="Gradle: org.grails:grails-datastore-gorm:6.1.6.RELEASE" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.eclipse.jetty.websocket:websocket-client:9.4.5.v20170502" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.tomcat.embed:tomcat-embed-logging-log4j:8.5.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.eclipse.jetty.websocket:websocket-client:9.4.5.v20170502" level="project" />
     <orderEntry type="library" name="Gradle: org.grails:grails-datastore-gorm-validation:6.1.6.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-web:4.3.9.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.grails:grails-datastore-gorm-hibernate-core:6.1.6.RELEASE" level="project" />
