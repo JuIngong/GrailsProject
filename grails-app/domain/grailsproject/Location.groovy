@@ -8,6 +8,8 @@ class Location {
     String cp
     String ville
 
+    Poi poi
+
     static constraints = {
     }
 }
