@@ -8,7 +8,7 @@ class Location {
     String cp
     String ville
 
-    Poi poi
+    static belongsTo = [Poi]
 
     static constraints = {
     }
