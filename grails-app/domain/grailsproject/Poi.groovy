@@ -3,10 +3,10 @@ package grailsproject
 class Poi {
 
     String name
-    Location location
     String desc
 
     static hasMany = [images:Image]
+    static hasOne = [location:Location, user:User]
 
     static constraints = {
     }
