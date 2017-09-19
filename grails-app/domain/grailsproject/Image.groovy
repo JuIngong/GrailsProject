@@ -4,8 +4,9 @@ class Image {
 
     String fileName
 
-    static belongsTo = [Poi, PoiGrp]
-
     static constraints = {
+        fileName blank: false
     }
+
+    static belongsTo = [Poi]
 }

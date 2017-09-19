@@ -2,14 +2,19 @@ package grailsproject
 
 class Location {
 
-    double lat
-    double lon
+    Double lat
+    Double lon
     String adresse
     String cp
     String ville
 
-    static belongsTo = [Poi]
+    static belongsTo = Poi
 
     static constraints = {
+        lat nullable: true
+        lon nullable: true
+        adresse blank: false, maxSize: 200
+        cp blank: false, maxSize: 5
+        ville blank: false, maxSize: 200
     }
 }
