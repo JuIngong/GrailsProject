@@ -85,6 +85,11 @@ endpoints:
     jmx:
         unique-names: true
 
+
+server:
+    contextPath: /grailsprojet
+
+
 ---
 hibernate:
     cache:
