@@ -14,7 +14,6 @@ class UserController {
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond userService.listUsers(User.list(params)), model:[userCount: User.count()]
-        //respond User.list(params), model:[userCount: User.count()]
     }
 
     def show(User user) {

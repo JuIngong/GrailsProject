@@ -6,8 +6,8 @@ class Poi {
     String desc
     User user
     Location location
-    Date creation
-    Date lastEdit
+    Date dateCreated
+    Date lastUpdated
 
     static hasMany = [images:Image, poiGrp:PoiGrp]
     static belongsTo = PoiGrp
@@ -16,8 +16,8 @@ class Poi {
         name blank: false, maxSize: 200
         desc nullable: true
         images nullable: true
-        creation nullable: true
-        lastEdit nullable: true
+        dateCreated nullable: true
+        lastUpdated nullable: true
 
     }
 
