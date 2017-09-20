@@ -1,5 +1,7 @@
 package grailsproject
 
+import grails.plugin.springsecurity.annotation.Secured
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -7,16 +9,19 @@ import grails.transaction.Transactional
 class UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    def userService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond User.list(params), model:[userCount: User.count()]
+        respond userService.listUsers(User.list(params)), model:[userCount: User.count()]
+        //respond User.list(params), model:[userCount: User.count()]
     }
 
     def show(User user) {
         respond user
     }
 
+    @Secured(value=["hasRole('ROLE_ADMIN')"], httpMethod='POST')
     def create() {
         respond new User(params)
     }
@@ -76,6 +81,7 @@ class UserController {
     }
 
     @Transactional
+    @Secured(value=["hasRole('ROLE_ADMIN')"], httpMethod='POST')
     def delete(User user) {
 
         if (user == null) {
