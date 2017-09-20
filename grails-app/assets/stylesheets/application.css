@@ -8,8 +8,12 @@
 * compiled file, but it's generally better to create a new file per style scope.
 *
 *= require bootstrap
-*= require grails
-*= require main
-*= require mobile
+*= require metisMenu
+*= require metisMenu.min
+*= require sb-admin-2
+*= require sb-admin-2.min
+* require grails
+* require main
+* require mobile
 *= require_self
 */
