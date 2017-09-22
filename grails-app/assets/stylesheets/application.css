@@ -9,6 +9,7 @@
 *
 *= require bootstrap
 *= require metisMenu
+*= require multiple-select
 * require metisMenu.min
 * require sb-admin-2
 *= require sb-admin-2.min

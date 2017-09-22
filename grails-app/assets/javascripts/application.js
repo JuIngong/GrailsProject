@@ -11,6 +11,7 @@
 //= require metisMenu.min
 // require sb-admin-2
 //= require sb-admin-2.min
+//= require multiple-select
 //= require_tree .
 //= require_self
 
@@ -22,4 +23,12 @@ if (typeof jQuery !== 'undefined') {
             $('#spinner').fadeOut();
         });
     })(jQuery);
+
+    $(function () {
+        $('.multiple-select').multipleSelect({
+            filter: true
+        });
+    });
 }
+
+

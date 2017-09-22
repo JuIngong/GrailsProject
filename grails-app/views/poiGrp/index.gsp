@@ -10,7 +10,7 @@
 <div id="list-poiGrp" class="col-lg-12" role="main">
     <h1 class="page-header"><g:message code="default.list.label" args="[entityName]"/></h1>
     <g:if test="${flash.message}">
-        <div class="message" role="status">${flash.message}</div>
+        <div class="message alert alert-success" role="status">${flash.message}</div>
     </g:if>
     <div class="row">
         <div class="col-lg-12">
@@ -42,7 +42,7 @@
                                     </g:each>
                                 </ul>
                                 </td>
-                                <td>${poiGrp.image.fileName}</td>
+                                <td>${poiGrp.image?.fileName}</td>
                                 </tr>
                             </g:each>
                             </tbody>
@@ -59,17 +59,17 @@
                                    value="${((poiGrpCount % m) == 0) ? (Integer) (poiGrpCount / m) : (Integer) (poiGrpCount / m) + 1}"/>
 
                             <li class="paginate_button previous ${page == 0 ? 'disabled' : ''}">
-                                <a href= <g:createLink controller="poi" action="index"
+                                <a href= <g:createLink controller="poiGrp" action="index"
                                                        params="[offset: page == 0 ? 0 : (page - 1) * m, max: m]"/>>Previous</a>
                             </li>
                             <g:each var="i" in="${(0..ma - 1)}">
                                 <li class="paginate_button ${page == i ? 'active' : ''}">
-                                    <a href= <g:createLink controller="poi" action="index"
+                                    <a href= <g:createLink controller="poiGrp" action="index"
                                                            params="[offset: i * m, max: m]"/>>${i + 1}</a>
                                 </li>
                             </g:each>
                             <li class="paginate_button next ${page == ma - 1 ? 'disabled' : ''}">
-                                <a href= <g:createLink controller="poi" action="index"
+                                <a href= <g:createLink controller="poiGrp" action="index"
                                                        params="[offset: page == ma - 1 ? (ma - 1) * m : (page + 1) * m, max: m]"/>>Next</a>
                             </li>
                         </ul>
