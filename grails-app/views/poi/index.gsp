@@ -20,6 +20,7 @@
         <div class="message" role="status">${flash.message}</div>
     </g:if>
 
+    <!-- table + pagination -->
     <div class="row">
         <div class="col-lg-12">
             <div class="panel">
