@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <meta name="layout" content="mymain"/>
+    <meta name="layout" content="main"/>
     <title>Grails Project</title>
 
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />

@@ -9,8 +9,8 @@
 *
 *= require bootstrap
 *= require metisMenu
-*= require metisMenu.min
-*= require sb-admin-2
+* require metisMenu.min
+* require sb-admin-2
 *= require sb-admin-2.min
 * require grails
 * require main

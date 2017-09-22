@@ -7,9 +7,9 @@
 //
 //= require jquery-2.2.0.min
 //= require bootstrap
-//= require metisMenu
+// require metisMenu
 //= require metisMenu.min
-//= require sb-admin-2
+// require sb-admin-2
 //= require sb-admin-2.min
 //= require_tree .
 //= require_self

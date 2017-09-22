@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta name="layout" content="mymain" />
+        <meta name="layout" content="main" />
         <g:set var="entityName" value="${message(code: 'poiGrp.label', default: 'PoiGrp')}" />
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
