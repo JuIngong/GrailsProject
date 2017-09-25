@@ -21,10 +21,70 @@
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
-        <f:table collection="${userList}" properties="['id', 'username', 'accountLocked', 'enabled']" />
-            <div class="pagination">
-                <g:paginate total="${userCount ?: 0}" />
+
+            <!-- table + pagination -->
+            <div class="row">
+            <div class="col-lg-12">
+                <div class="panel">
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table id="datable" class="table table-striped table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nom</th>
+                                    <th>Account Locked</th>
+                                    <th>Enable</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <g:each in="${userList}" var="user">
+                                    <tr>
+                                        <td>${user.id}</td>
+                                        <td><a href= <g:createLink controller="user" action="show"
+                                                                   params="[id: user.id]"/>>${user.username}</a></td>
+                                        <td>${user.accountLocked}</td>
+                                        <td>${user.enabled}</td>
+                                    </tr>
+                                </g:each>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+
+                        <div class="col-lg-9 no-padding-left">
+                            <ul class="pagination">
+                                <g:set var="off" value="${params.offset ?: 0}"/>
+                                <g:set var="m" value="${params.max ?: 10}"/>
+                                <g:set var="page" value="${off.toInteger() / m}"/>
+                                <g:set var="ma"
+                                       value="${((userCount % m) == 0) ? (Integer) (userCount / m) : (Integer) (userCount / m) + 1}"/>
+
+                                <li class="paginate_button previous ${page == 0 ? 'disabled' : ''}">
+                                    <a href= <g:createLink controller="user" action="index"
+                                                           params="[offset: page == 0 ? 0 : (page - 1) * m, max: m]"/>>Previous</a>
+                                </li>
+                                <g:each var="i" in="${(0..ma - 1)}">
+                                    <li class="paginate_button ${page == i ? 'active' : ''}">
+                                        <a href= <g:createLink controller="user" action="index"
+                                                               params="[offset: i * m, max: m]"/>>${i + 1}</a>
+                                    </li>
+                                </g:each>
+                                <li class="paginate_button next ${page == ma - 1 ? 'disabled' : ''}">
+                                    <a href= <g:createLink controller="user" action="index"
+                                                           params="[offset: page == ma - 1 ? (ma - 1) * m : (page + 1) * m, max: m]"/>>Next</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.panel-body -->
+
+                </div>
+                <!-- /.panel -->
             </div>
+            <!-- /.col-lg-6 -->
+        </div>
         </div>
     </body>
 </html>
