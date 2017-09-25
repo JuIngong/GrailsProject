@@ -24,7 +24,7 @@ if (typeof jQuery !== 'undefined') {
         });
     })(jQuery);
 
-    $(function () {
+    $(document).ready(function () {
         $('.multiple-select').multipleSelect({
             filter: true
         });
