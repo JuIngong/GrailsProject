@@ -1,5 +1,6 @@
 package grailsproject
 
+import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
@@ -8,7 +9,8 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class UserController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: "PUT", updateMe: "PUT", delete: "DELETE"]
+    def springSecurityService
     def userService
 
     def index(Integer max) {
@@ -50,6 +52,10 @@ class UserController {
         }
     }
 
+    def account() {
+        respond springSecurityService.getCurrentUser()
+    }
+
     def edit(User user) {
         respond user
     }
@@ -74,8 +80,36 @@ class UserController {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
                 redirect user
-            }
+                }
             '*'{ respond user, [status: OK] }
+        }
+    }
+
+    @Transactional
+    def updateMe() {
+        def user = User.get(springSecurityService.getCurrentUser().id)
+
+        if (user == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        if (user.hasErrors()) {
+            transactionStatus.setRollbackOnly()
+            respond user.errors, view:'account'
+            return
+        }
+
+        user.username = params.username
+        user.save flush:true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), user.id])
+                redirect (uri:'/user/account')
+            }
+            '*'{ respond (view:'account', [status: OK]) }
         }
     }
 
