@@ -1,24 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="layout" content="mymain" />
+    <meta name="layout" content="main" />
     <g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
-    <title><g:message code="default.account.label" args="[entityName]" /></title>
+    <title><g:message code="default.edit.label" args="[entityName]" /></title>
 </head>
 <body>
-<a href="#account-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-<div class="nav" role="navigation">
-    <ul>
-        <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-        <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-        <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-    </ul>
-</div>
 <div id="account-user" class="content scaffold-account" role="main">
-    <h1><g:message code="default.account.label" args="[entityName]" /></h1>
+    <h1>Mon compte</h1>
     <g:if test="${flash.message}">
-        <div class="message" role="status">${flash.message}</div>
+        <div class="alert alert-success" role="status">${flash.message}</div>
     </g:if>
+
     <g:hasErrors bean="${this.user}">
         <ul class="errors" role="alert">
             <g:eachError bean="${this.user}" var="error">
@@ -26,15 +19,22 @@
             </g:eachError>
         </ul>
     </g:hasErrors>
-    <g:form url="[controller:'user',action:'updateMe']" resource="${this.user}" method="PUT">
-        <g:hiddenField name="version" value="${this.user?.version}" />
-        <fieldset class="form">
-            <f:all bean="user"/>
-        </fieldset>
-        <fieldset class="buttons">
-            <input class="save" type="submit" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-        </fieldset>
-    </g:form>
+
+    <div class="col-lg-4">
+        <g:form url="[controller:'user',action:'updateMe']" resource="${this.user}" method="PUT">
+            <g:hiddenField name="version" value="${this.user?.version}" />
+
+            <div class="form-group">
+                <label for="username">Nom Utilisateur</label>
+                <g:textField id="username" name="username" class="form-control" value="${user.username}" />
+            </div>
+
+            <div class="form-group">
+                <g:submitButton name="save" class="save btn btn-primary"
+                                value="${message(code: 'default.button.update.label', default: 'Update')}"/>
+            </div>
+        </g:form>
+    </div>
 </div>
 </body>
 </html>
