@@ -7,7 +7,6 @@ class PoiGrp {
 
     static hasMany = [pois:Poi]
 
-
     static constraints = {
         pois nullable: true
         name blank: false

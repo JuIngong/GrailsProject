@@ -5,7 +5,8 @@ class Poi {
     String name
     String desc
     User user
-    Location location
+    String lat
+    String lng
     Date dateCreated
     Date lastUpdated
 

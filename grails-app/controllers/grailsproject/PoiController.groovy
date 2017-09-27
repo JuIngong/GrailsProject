@@ -1,16 +1,21 @@
 package grailsproject
 
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class PoiController {
 
+    def springSecurityService
+    def poiService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
+        println "bloaau"
         params.max = Math.min(max ?: 10, 100)
-        respond Poi.list(params), model:[poiCount: Poi.count()]
+        respond Poi.list(params), model: [poiCount: Poi.count()]
     }
 
     def show(Poi poi) {
@@ -31,11 +36,17 @@ class PoiController {
 
         if (poi.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond poi.errors, view:'create'
+            respond poi.errors, view: 'create'
             return
         }
 
-        poi.save flush:true
+        if(poi.user.id != springSecurityService.getCurrentUser().id){
+            poi.user = User.get(springSecurityService.getCurrentUser().id)
+        }
+
+        poiService.addPoiToPoiGrp(poi)
+
+        poi.save flush: true
 
         request.withFormat {
             form multipartForm {
@@ -57,41 +68,41 @@ class PoiController {
             notFound()
             return
         }
-
         if (poi.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond poi.errors, view:'edit'
+            respond poi.errors, view: 'edit'
             return
         }
 
-        poi.save flush:true
+        poi.save flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'poi.label', default: 'Poi'), poi.id])
                 redirect poi
             }
-            '*'{ respond poi, [status: OK] }
+            '*' { respond poi, [status: OK] }
         }
     }
 
     @Transactional
     def delete(Poi poi) {
-
         if (poi == null) {
             transactionStatus.setRollbackOnly()
             notFound()
             return
         }
 
-        poi.delete flush:true
+        poiService.delAllPoiToPoiGrp(poi)
+
+        poi.delete flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'poi.label', default: 'Poi'), poi.id])
-                redirect action:"index", method:"GET"
+                redirect action: "index", method: "GET"
             }
-            '*'{ render status: NO_CONTENT }
+            '*' { render status: NO_CONTENT }
         }
     }
 
@@ -101,7 +112,7 @@ class PoiController {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'poi.label', default: 'Poi'), params.id])
                 redirect action: "index", method: "GET"
             }
-            '*'{ render status: NOT_FOUND }
+            '*' { render status: NOT_FOUND }
         }
     }
 }

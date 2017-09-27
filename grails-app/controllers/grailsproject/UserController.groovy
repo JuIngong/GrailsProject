@@ -89,7 +89,6 @@ class UserController {
     @Transactional
     def updateMe() {
         def user = User.get(springSecurityService.getCurrentUser().id)
-
         if (user == null) {
             transactionStatus.setRollbackOnly()
             notFound()
