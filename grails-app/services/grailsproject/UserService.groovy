@@ -25,4 +25,9 @@ class UserService {
         }
     }
 
+    def createUserWithRole(User user, String roleName) {
+        def role = Role.get(roleName)
+        UserRole.create(user, role, true)
+    }
+
 }

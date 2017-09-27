@@ -42,6 +42,7 @@ class UserController {
         }
 
         user.save flush:true
+        userService.createUserWithRole(user, params.role)
 
         request.withFormat {
             form multipartForm {

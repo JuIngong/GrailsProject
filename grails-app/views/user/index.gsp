@@ -34,6 +34,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Nom</th>
+                                    <th>Roles</th>
                                     <th>Account Locked</th>
                                     <th>Enable</th>
                                 </tr>
@@ -44,6 +45,13 @@
                                         <td>${user.id}</td>
                                         <td><a href= <g:createLink controller="user" action="show"
                                                                    params="[id: user.id]"/>>${user.username}</a></td>
+                                        <td>
+                                            <ul>
+                                                <g:each in="${user.getAuthorities()}" var="authority">
+                                                    <li>${authority.getAuthority()}</li>
+                                                </g:each>
+                                            </ul>
+                                        </td>
                                         <td>${user.accountLocked}</td>
                                         <td>${user.enabled}</td>
                                     </tr>

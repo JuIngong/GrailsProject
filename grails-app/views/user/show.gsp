@@ -20,6 +20,15 @@
             </div>
 
             <div class="form-group">
+                <label>Roles</label>
+                <g:each in="${user.getAuthorities()}" var="authority">
+                    <ul>
+                        <li>${authority.getAuthority()}</li>
+                    </ul>
+                </g:each>
+            </div>
+
+            <div class="form-group">
                 <g:checkBox id="enabled" name="enabled" readonly="true" value="${user.enabled}" />
                 <div class="btn-group">
                     <label for="enabled" class="btn btn-danger">

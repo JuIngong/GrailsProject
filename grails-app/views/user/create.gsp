@@ -1,3 +1,4 @@
+<%@ page import="grailsproject.Role" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,18 +7,13 @@
         <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#create-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
         <div id="create-user" class="content scaffold-create" role="main">
-            <h1><g:message code="default.create.label" args="[entityName]" /></h1>
+            <h1>Créer un utilisateur</h1>
+
             <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
+                <div class="alert alert-success" role="status">${flash.message}</div>
             </g:if>
+
             <g:hasErrors bean="${this.user}">
             <ul class="errors" role="alert">
                 <g:eachError bean="${this.user}" var="error">
@@ -25,14 +21,33 @@
                 </g:eachError>
             </ul>
             </g:hasErrors>
-            <g:form resource="${this.user}" method="POST">
-                <fieldset class="form">
-                    <f:all bean="user"/>
-                </fieldset>
-                <fieldset class="buttons">
-                    <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-                </fieldset>
-            </g:form>
+
+            <div class="col-lg-4">
+                <g:form resource="${this.user}" method="POST">
+                    <div class="form-group">
+                        <label for="username">Nom Utilisateur</label>
+                        <g:textField id="username" name="username" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <g:passwordField id="password" name="password" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <g:select id="role" name="role" class="form-control"
+                                  from="${Role.list()}"
+                                  optionValue="authority"
+                                  optionKey="id" />
+                    </div>
+
+                    <div class="form-group">
+                        <g:submitButton name="create" class="save btn btn-primary"
+                                        value="${message(code: 'default.button.create.label', default: 'Create')}"/>
+                    </div>
+                </g:form>
+            </div>
         </div>
     </body>
 </html>
