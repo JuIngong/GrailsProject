@@ -21,11 +21,7 @@
 
             <div class="form-group">
                 <label>Roles</label>
-                <g:each in="${user.getAuthorities()}" var="authority">
-                    <ul>
-                        <li>${authority.getAuthority()}</li>
-                    </ul>
-                </g:each>
+                <g:textField name="role" id="role" class="form-control" readonly="" value="${user.getAuthorities()[0].authority}" />
             </div>
 
             <div class="form-group">

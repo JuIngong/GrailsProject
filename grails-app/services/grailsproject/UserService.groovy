@@ -25,9 +25,29 @@ class UserService {
         }
     }
 
+    def updateUserSettings(User user, def params) {
+        user.username = params.username
+
+        if(params.password != "") {
+            if (params.password?.trim()) {
+                user.password = params.password
+                return true
+            }
+            else {
+                return false
+            }
+        }
+        return true
+    }
+
     def createUserWithRole(User user, String roleName) {
         def role = Role.get(roleName)
         UserRole.create(user, role, true)
+    }
+
+    def updateUserRole(User user, String roleName) {
+        UserRole.remove(user, user.getAuthorities()[0])
+        UserRole.create(user, Role.get(roleName))
     }
 
 }

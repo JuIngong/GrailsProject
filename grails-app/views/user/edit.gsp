@@ -1,3 +1,4 @@
+<%@ page import="grailsproject.Role" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -27,6 +28,16 @@
                         <label for="username">Nom Utilisateur</label>
                         <g:textField id="username" name="username" class="form-control" value="${user.username}" />
                     </div>
+
+                    <sec:ifAnyGranted roles='ROLE_ADMIN'>
+                    <div class="form-group">
+                            <label for="role">Role</label>
+                            <g:select id="role" name="role" class="form-control" value="${user.getAuthorities()[0].id}"
+                                      from="${Role.list()}"
+                                      optionValue="authority"
+                                      optionKey="id" />
+                        </div>
+                    </sec:ifAnyGranted>
 
                     <div class="form-group">
                         <g:checkBox id="enabled" name="enabled" readonly="true" value="${user.enabled}" />
