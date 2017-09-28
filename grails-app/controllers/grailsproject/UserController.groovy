@@ -75,6 +75,7 @@ class UserController {
             return
         }
 
+        userService.updateUserRole(user, params.role)
         user.save flush:true
 
         request.withFormat {
@@ -101,8 +102,8 @@ class UserController {
             return
         }
 
-        user.username = params.username
-        user.save flush:true
+        if(userService.updateUserSettings(user, params))
+            user.save flush:true
 
         request.withFormat {
             form multipartForm {

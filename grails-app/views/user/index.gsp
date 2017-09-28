@@ -45,13 +45,7 @@
                                         <td>${user.id}</td>
                                         <td><a href= <g:createLink controller="user" action="show"
                                                                    params="[id: user.id]"/>>${user.username}</a></td>
-                                        <td>
-                                            <ul>
-                                                <g:each in="${user.getAuthorities()}" var="authority">
-                                                    <li>${authority.getAuthority()}</li>
-                                                </g:each>
-                                            </ul>
-                                        </td>
+                                        <td>${user.getAuthorities()[0].authority}</td>
                                         <td>${user.accountLocked}</td>
                                         <td>${user.enabled}</td>
                                     </tr>

@@ -30,6 +30,11 @@
             </div>
 
             <div class="form-group">
+                <label for="password">Nouveau mot de passe</label>
+                <g:passwordField id="password" name="password" class="form-control" />
+            </div>
+
+            <div class="form-group">
                 <g:submitButton name="save" class="save btn btn-primary"
                                 value="${message(code: 'default.button.update.label', default: 'Update')}"/>
             </div>
