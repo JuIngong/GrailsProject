@@ -132,6 +132,20 @@
 
 </div>
 
+<div class="container">
+    <div class="row">
+        <hr>
+        <div class="col-lg-12">
+            <div class="col-md-7">
+                <a href="https://github.com/JuIngong/GrailsProject"><i id="social-gh" class="fa fa-github-square fa-3x social"></i></a>
+            </div>
+            <div class="col-md-5">
+                <p class="muted pull-right">© 2017 Projet Grails. Muller Florian | Testanière Fréderic</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="spinner" class="spinner" style="display:none;">
     <g:message code="spinner.alt" default="Loading&hellip;"/>
 </div>
