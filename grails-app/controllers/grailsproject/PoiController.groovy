@@ -13,7 +13,6 @@ class PoiController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
-        println "bloaau"
         params.max = Math.min(max ?: 10, 100)
         respond Poi.list(params), model: [poiCount: Poi.count()]
     }
