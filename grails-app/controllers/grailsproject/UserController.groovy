@@ -104,6 +104,16 @@ class UserController {
 
         if(userService.updateUserSettings(user, params))
             user.save flush:true
+        else {
+            request.withFormat {
+                form multipartForm {
+                    flash.message = "Nouveau mot de passe invalide"
+                    redirect (uri:'/user/account')
+                }
+                '*'{ respond (view:'account', [status: OK]) }
+            }
+            return
+        }
 
         request.withFormat {
             form multipartForm {

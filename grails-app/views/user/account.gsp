@@ -9,7 +9,12 @@
 <div id="account-user" class="content scaffold-account" role="main">
     <h1>Mon compte</h1>
     <g:if test="${flash.message}">
-        <div class="alert alert-success" role="status">${flash.message}</div>
+        <g:if test="${flash.message != 'Nouveau mot de passe invalide' }">
+            <div class="alert alert-success" role="status">${flash.message}</div>
+        </g:if>
+        <g:else>
+            <div class="alert alert-warning" role="status">${flash.message}</div>
+        </g:else>
     </g:if>
 
     <g:hasErrors bean="${this.user}">
