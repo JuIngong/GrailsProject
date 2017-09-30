@@ -39,58 +39,59 @@
                         </div>
                     </sec:ifAnyGranted>
 
-                    <div class="form-group">
-                        <g:checkBox id="enabled" name="enabled" readonly="true" value="${user.enabled}" />
-                        <div class="btn-group">
-                            <label for="enabled" class="btn btn-danger">
-                                <span class="fa fa-check"></span>
-                                <span> </span>
-                            </label>
-                            <label for="enabled" class="btn btn-default active">
-                                Compte actif
-                            </label>
+                    <div class="user-check">
+                        <div class="form-group">
+                            <g:checkBox id="enabled" name="enabled" readonly="true" value="${user.enabled}" />
+                            <div class="btn-group">
+                                <label for="enabled" class="btn btn-danger">
+                                    <span class="fa fa-check"></span>
+                                    <span> </span>
+                                </label>
+                                <label for="enabled" class="btn btn-default active">
+                                    Compte actif
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <g:checkBox name="accountExpired" id="accountExpired" value="${user.accountExpired}"/>
+                            <div class="btn-group">
+                                <label for="accountExpired" class="btn btn-danger">
+                                    <span class="fa fa-check"></span>
+                                    <span> </span>
+                                </label>
+                                <label for="accountExpired" class="btn btn-default active">
+                                    Compte expiré
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <g:checkBox name="accountLocked" id="accountLocked" value="${user.accountLocked}"/>
+                            <div class="btn-group">
+                                <label for="accountLocked" class="btn btn-danger">
+                                    <span class="fa fa-check"></span>
+                                    <span> </span>
+                                </label>
+                                <label for="accountLocked" class="btn btn-default active">
+                                    Compte vérouillé
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <g:checkBox name="passwordExpired" id="passwordExpired" value="${user.passwordExpired}"/>
+                            <div class="btn-group">
+                                <label for="passwordExpired" class="btn btn-danger">
+                                    <span class="fa fa-check"></span>
+                                    <span> </span>
+                                </label>
+                                <label for="passwordExpired" class="btn btn-default active">
+                                    Mot de passe expiré
+                                </label>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <g:checkBox name="accountExpired" id="accountExpired" value="${user.accountExpired}"/>
-                        <div class="btn-group">
-                            <label for="accountExpired" class="btn btn-danger">
-                                <span class="fa fa-check"></span>
-                                <span> </span>
-                            </label>
-                            <label for="accountExpired" class="btn btn-default active">
-                                Compte expiré
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <g:checkBox name="accountLocked" id="accountLocked" value="${user.accountLocked}"/>
-                        <div class="btn-group">
-                            <label for="accountLocked" class="btn btn-danger">
-                                <span class="fa fa-check"></span>
-                                <span> </span>
-                            </label>
-                            <label for="accountLocked" class="btn btn-default active">
-                                Compte vérouillé
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <g:checkBox name="passwordExpired" id="passwordExpired" value="${user.passwordExpired}"/>
-                        <div class="btn-group">
-                            <label for="passwordExpired" class="btn btn-danger">
-                                <span class="fa fa-check"></span>
-                                <span> </span>
-                            </label>
-                            <label for="passwordExpired" class="btn btn-default active">
-                                Mot de passe expiré
-                            </label>
-                        </div>
-                    </div>
-
                     <div class="form-group">
                         <g:submitButton name="save" class="save btn btn-primary"
                                         value="${message(code: 'default.button.update.label', default: 'Update')}"/>

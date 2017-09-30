@@ -25,10 +25,16 @@ class UserService {
         }
     }
 
-    def updateUserSettings(User user, def params) {
-        user.username = params.username
+    def updateUserName(User user, def params) {
+        def compare = true
+        User.all.each {
+            if(it.username.equals(params.username))
+                compare = false
+        }
+        return compare
+    }
 
-        if(params.password != "") {
+    def updateUserPassword(User user, def params) {
             if (params.password?.trim()) {
                 user.password = params.password
                 return true
@@ -36,8 +42,6 @@ class UserService {
             else {
                 return false
             }
-        }
-        return true
     }
 
     def createUserWithRole(User user, String roleName) {

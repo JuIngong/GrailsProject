@@ -98,12 +98,40 @@ class UserController {
 
         if (user.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond user.errors, view:'account'
+            respond user.errors, view: 'account'
             return
         }
 
-        if(userService.updateUserSettings(user, params))
-            user.save flush:true
+        if(params.username != user.username) {
+            if (userService.updateUserName(user, params))
+                user.username = params.username
+             else {
+                request.withFormat {
+                    form multipartForm {
+                        flash.message = "Erreur name"
+                        redirect(uri: '/user/account')
+                    }
+                    '*' { respond(view: 'account', [status: OK]) }
+                }
+                return
+            }
+        }
+
+        if(params.password != "") {
+            if (!userService.updateUserPassword(user, params))
+             {
+                request.withFormat {
+                    form multipartForm {
+                        flash.message = "Erreur mdp"
+                        redirect(uri: '/user/account')
+                    }
+                    '*' { respond(view: 'account', [status: OK]) }
+                }
+                return
+            }
+        }
+
+        user.save flush: true
 
         request.withFormat {
             form multipartForm {
