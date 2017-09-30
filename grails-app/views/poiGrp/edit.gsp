@@ -22,7 +22,7 @@
         </ul>
     </g:hasErrors>
     <div class="col-lg-4">
-        <g:form resource="${this.poiGrp}" method="PUT">
+        <g:form resource="${this.poiGrp}" enctype="multipart/form-data" method="POST">
             <g:hiddenField name="version" value="${this.poiGrp?.version}"/>
             <div class="form-group">
                 <label for="name">Nom</label>
@@ -32,8 +32,10 @@
             <div class="form-group">
                 <label for="image">Image</label>
 
+                <p><img src="${path + "/poiGrp" + poiGrp.id + "/" + poiGrp.image}" class="img-rounded" height="150"></p>
+
                 <p>${poiGrp?.image}</p>
-                <input id="image" type="file">
+                <input id="image" type="file" name="imageGrp" accept=".jpg, .jpeg, .png">
             </div>
 
             <div class="form-group">
@@ -47,7 +49,7 @@
             </div>
 
             <div class="form-group">
-                <g:submitButton name="save" class="save btn btn-primary"
+                <g:submitButton name="update" class="save btn btn-primary"
                                 value="${message(code: 'default.button.update.label', default: 'Update')}"/>
             </div>
         %{--<fieldset class="buttons">--}%
@@ -57,5 +59,13 @@
         </g:form>
     </div>
 </div>
+<g:javascript>
+       $(document).ready(function () {
+           var path = window.location.pathname;
+           var test = path.split('/');
+           $("form")[0].action =  '/' + test[1] + '/' + test[2] + '/update/' + test[4];
+       });
+
+</g:javascript>
 </body>
 </html>

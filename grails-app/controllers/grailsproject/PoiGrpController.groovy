@@ -11,7 +11,7 @@ class PoiGrpController {
 
     def uploadImageService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [update: ["POST", "PUT"], save: "POST", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -21,7 +21,7 @@ class PoiGrpController {
     def show(PoiGrp poiGrp) {
         def pois = poiGrp.pois as JSON
         def path = Holders.config.getRequiredProperty('grails.guides.cdnRootUrl')
-        respond poiGrp, model: [pois: pois, path:path]
+        respond poiGrp, model: [pois: pois, path: path]
     }
 
     def create() {
@@ -42,9 +42,11 @@ class PoiGrpController {
             return
         }
 
-        poiGrp = poiGrp.save flush:true
+        poiGrp = poiGrp.save flush: true
 
-        uploadImageService.uploadPoiGrpImage(poiGrp, params.imageGrp)
+        if (params.imageGrp.originalFilename != "") {
+            uploadImageService.uploadPoiGrpImage(poiGrp, params.imageGrp)
+        }
 
         request.withFormat {
             form multipartForm {
@@ -56,7 +58,8 @@ class PoiGrpController {
     }
 
     def edit(PoiGrp poiGrp) {
-        respond poiGrp
+        def path = Holders.config.getRequiredProperty('grails.guides.cdnRootUrl')
+        respond poiGrp, model: [path: path]
     }
 
     @Transactional
@@ -73,8 +76,11 @@ class PoiGrpController {
             return
         }
 
-        poiGrp.save flush: true
-
+        if (params.imageGrp.originalFilename != "") {
+            uploadImageService.uploadPoiGrpImage(poiGrp, params.imageGrp)
+        } else {
+            poiGrp.save(flush: true)
+        }
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'poiGrp.label', default: 'PoiGrp'), poiGrp.id])

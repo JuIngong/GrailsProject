@@ -10,7 +10,7 @@
 <div id="show-poi" class="col-lg-12" role="main">
     <h1 class="page-header"><g:message code="default.show.label" args="[entityName]"/></h1>
     <g:if test="${flash.message}">
-        <div class="message" role="status">${flash.message}</div>
+        <div class="message alert alert-success" role="status">${flash.message}</div>
     </g:if>
 
     <div class="col-lg-4">

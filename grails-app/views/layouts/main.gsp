@@ -13,6 +13,8 @@
 
     <asset:stylesheet src="application.css"/>
 
+    <asset:javascript src="application.js"/>
+
     <g:layoutHead/>
 </head>
 
@@ -152,7 +154,6 @@
 
 
 
-<asset:javascript src="application.js"/>
 
 </body>
 </html>
