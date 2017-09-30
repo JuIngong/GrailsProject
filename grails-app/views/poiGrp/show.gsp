@@ -20,7 +20,7 @@
                 <img class="first-slide" src="${path+"/poiGrp"+poiGrp.id+"/" +poiGrp.image}" alt="First slide">
                 <div class="container">
                     <div class="carousel-caption">
-                        <h2>${poiGrp.name}</h2>
+                        <h1>${poiGrp.name}</h1>
                     </div>
                 </div>
             </div>

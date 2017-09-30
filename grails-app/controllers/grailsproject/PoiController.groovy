@@ -1,5 +1,6 @@
 package grailsproject
 
+import grails.util.Holders
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -9,6 +10,7 @@ class PoiController {
 
     def springSecurityService
     def poiService
+    def uploadImageService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -18,7 +20,9 @@ class PoiController {
     }
 
     def show(Poi poi) {
-        respond poi
+
+        def path = Holders.config.getRequiredProperty('grails.guides.cdnRootUrl')
+        respond poi, model: [path: path]
     }
 
     def create() {
@@ -39,13 +43,18 @@ class PoiController {
             return
         }
 
+
         if (poi.user.id != springSecurityService.getCurrentUser().id) {
             poi.user = User.get(springSecurityService.getCurrentUser().id)
         }
 
         poiService.addPoiToPoiGrp(poi)
 
-        poi.save flush: true
+        poi = poi.save flush: true
+
+        if (params.imagesPoi != "") {
+            uploadImageService.uploadPoiImage(poi, params.imagesPoi)
+        }
 
         request.withFormat {
             form multipartForm {
@@ -57,7 +66,9 @@ class PoiController {
     }
 
     def edit(Poi poi) {
-        respond poi
+
+        def path = Holders.config.getRequiredProperty('grails.guides.cdnRootUrl')
+        respond poi, model: [path: path]
     }
 
     @Transactional

@@ -21,14 +21,20 @@ class UploadImageService implements GrailsConfigurationAware{
     @SuppressWarnings('JavaIoPackageAccess')
     Poi uploadPoiImage(Poi poi, def image) {
 
-        String filename = image.originalFilename
+        def filename = []
+        image.each {
+            filename.add(it.originalFilename)
+        }
         def folderPath = "${cdnFolder}/poi${poi.id}" as String
         def folder = new File(folderPath)
         if ( !folder.exists() ) {
             folder.mkdirs()
         }
-        def path = "${folderPath}/${filename}" as String
-        image.transferTo(new File(path))
+
+        image.each {
+            def path = "${folderPath}/${it.originalFilename}" as String
+            it.transferTo(new File(path))
+        }
 
         def p = poiService.updateFeaturedImageUrl(poi.id, filename)
 
@@ -42,6 +48,7 @@ class UploadImageService implements GrailsConfigurationAware{
     PoiGrp uploadPoiGrpImage(PoiGrp poiGrp, def image) {
 
         String filename = image.originalFilename
+        String old = poiGrp.image
         def folderPath = "${cdnFolder}/poiGrp${poiGrp.id}" as String
         def folder = new File(folderPath)
         if ( !folder.exists() ) {
@@ -56,6 +63,11 @@ class UploadImageService implements GrailsConfigurationAware{
             def f = new File(path)
             f.delete()
         }
+        if(old != "" && old != filename){
+            def oldf = new File("${folderPath}/${old}")
+            oldf.delete()
+        }
+
         poi
     }
 

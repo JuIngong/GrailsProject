@@ -23,7 +23,7 @@
         </ul>
     </g:hasErrors>
     <div class="col-lg-4">
-        <g:form resource="${this.poi}" method="POST">
+        <g:form resource="${this.poi}" enctype="multipart/form-data" method="POST">
 
             <div class="form-group">
                 <label for="name">Nom</label>
@@ -37,7 +37,7 @@
 
             <div class="form-group">
                 <label for="image">Image</label>
-                <input id="image" type="file">
+                <input id="image" type="file" name="imagesPoi" multiple>
             </div>
 
             <div class="form-group">

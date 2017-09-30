@@ -7,7 +7,7 @@
     <facet type="web" name="Web Gradle : GrailsProject-0.1.war">
       <configuration>
         <webroots>
-          <root url="file://C:\Users\Fred\IdeaProjects\GrailsProject\src\main\webapp" relative="/" />
+          <root url="file://C:\Users\JuIngong\Documents\Miage\M2\ServeurGrails\GrailsProject\src\main\webapp" relative="/" />
           <root url="file://$MODULE_DIR$/../../build/assets" relative="/assets" />
         </webroots>
         <sourceRoots />
