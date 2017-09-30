@@ -8,14 +8,33 @@ class PoiService {
     def addPoiToPoiGrp(Poi poi) {
         poi.poiGrp.each {
             poiGrp ->
-                poiGrp.addToPois(poi)
+                poi.addToPoiGrp(poiGrp)
+        }
+    }
+
+    def updatePoiToPoiGrp(Poi poi, def test) {
+        delAllPoiToPoiGrp(poi)
+        test.each {
+            PoiGrp.get(it).addToPois(poi)
         }
     }
 
     def delAllPoiToPoiGrp(Poi poi) {
-        poi.poiGrp.each {
+        def tmp = []
+        tmp.addAll(poi.poiGrp)
+        tmp.each {
             poiGrp ->
-                poiGrp.removeFromPois(poi)
+                poi.removeFromPoiGrp(poiGrp)
         }
+    }
+
+    @Transactional
+    Poi updateFeaturedImageUrl(Long id, String featuredImageUrl) {
+        Poi poi = Poi.get(id)
+        if ( !poi ) {
+            return null
+        }
+        poi.images.add(featuredImageUrl)
+        poi.save(flush:true)
     }
 }

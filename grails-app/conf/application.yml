@@ -31,6 +31,9 @@ endpoints:
 
 ---
 grails:
+    guides:
+        cdnFolder: C:\wamp64\www\images\grailsProject
+        cdnRootUrl: http://localhost:8081/images/grailsProject
     mime:
         disable:
             accept:
@@ -68,6 +71,9 @@ grails:
             maxsize: 1000
     controllers:
         defaultScope: singleton
+        upload:
+            maxFileSize: 26214400
+            maxRequestSize: 26214400
     converters:
         encoding: UTF-8
     views:

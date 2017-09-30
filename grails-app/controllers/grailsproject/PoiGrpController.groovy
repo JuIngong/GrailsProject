@@ -1,20 +1,27 @@
 package grailsproject
 
+import grails.converters.JSON
+import grails.util.Holders
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class PoiGrpController {
 
+    def uploadImageService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond PoiGrp.list(params), model:[poiGrpCount: PoiGrp.count()]
+        respond PoiGrp.list(params), model: [poiGrpCount: PoiGrp.count()]
     }
 
     def show(PoiGrp poiGrp) {
-        respond poiGrp
+        def pois = poiGrp.pois as JSON
+        def path = Holders.config.getRequiredProperty('grails.guides.cdnRootUrl')
+        respond poiGrp, model: [pois: pois, path:path]
     }
 
     def create() {
@@ -31,11 +38,13 @@ class PoiGrpController {
 
         if (poiGrp.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond poiGrp.errors, view:'create'
+            respond poiGrp.errors, view: 'create'
             return
         }
 
-        poiGrp.save flush:true
+        poiGrp = poiGrp.save flush:true
+
+        uploadImageService.uploadPoiGrpImage(poiGrp, params.imageGrp)
 
         request.withFormat {
             form multipartForm {
@@ -60,18 +69,18 @@ class PoiGrpController {
 
         if (poiGrp.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond poiGrp.errors, view:'edit'
+            respond poiGrp.errors, view: 'edit'
             return
         }
 
-        poiGrp.save flush:true
+        poiGrp.save flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'poiGrp.label', default: 'PoiGrp'), poiGrp.id])
                 redirect poiGrp
             }
-            '*'{ respond poiGrp, [status: OK] }
+            '*' { respond poiGrp, [status: OK] }
         }
     }
 
@@ -84,14 +93,14 @@ class PoiGrpController {
             return
         }
 
-        poiGrp.delete flush:true
+        poiGrp.delete flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'poiGrp.label', default: 'PoiGrp'), poiGrp.id])
-                redirect action:"index", method:"GET"
+                redirect action: "index", method: "GET"
             }
-            '*'{ render status: NO_CONTENT }
+            '*' { render status: NO_CONTENT }
         }
     }
 
@@ -101,7 +110,7 @@ class PoiGrpController {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'poiGrp.label', default: 'PoiGrp'), params.id])
                 redirect action: "index", method: "GET"
             }
-            '*'{ render status: NOT_FOUND }
+            '*' { render status: NOT_FOUND }
         }
     }
 }

@@ -7,8 +7,8 @@
 </head>
 
 <body>
-<div id="show-poi" class="content scaffold-show" role="main">
-    <h1><g:message code="default.show.label" args="[entityName]"/></h1>
+<div id="show-poi" class="col-lg-12" role="main">
+    <h1 class="page-header"><g:message code="default.show.label" args="[entityName]"/></h1>
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
@@ -27,7 +27,7 @@
         <div class="form-group">
             <label>Images</label>
             <g:each in="${poi.images}" var="imgs">
-                <p>${imgs.fileName}</p>
+                <p>${imgs}</p>
             </g:each>
         </div>
 
@@ -36,7 +36,7 @@
             <ul>
                 <g:each in="${poi.poiGrp}" var="grp">
                     <li><a href= <g:createLink controller="poiGrp" action="show"
-                                               params="[id: poi.id]"/>>${grp.name}</a>
+                                               params="[id: grp.id]"/>>${grp.name}</a>
                     </li>
                 </g:each>
             </ul>

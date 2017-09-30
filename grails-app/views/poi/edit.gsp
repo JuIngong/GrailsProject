@@ -39,7 +39,7 @@
             <div class="form-group">
                 <label for="image">Images</label>
                 <g:each in="${poi.images}" var="imgs">
-                    <p>${imgs.fileName}</p>
+                    <p>${imgs}</p>
                 </g:each>
                 <input id="image" type="file">
             </div>

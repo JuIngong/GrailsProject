@@ -18,12 +18,12 @@ class BootStrap {
 
             def listPoiGrp = []
 
-            (1..3).each {listPoiGrp.add(new PoiGrp(name: 'groupe'+it, image: new Image(fileName: 'illustration'+it)).save())}
-            listPoiGrp.each {PoiGrp grp ->
+            (1..3).each { listPoiGrp.add(new PoiGrp(name: 'groupe' + it, image: 'illustration' + it).save()) }
+            listPoiGrp.each { PoiGrp grp ->
                 (1..5).each {
-                    def poi = new Poi(name: 'poi '+it+grp.id, desc: 'desc '+it, user: adminInstance,
-                            lat: '12', lng:'13')
-                            .addToImages(new Image(fileName: 'testeee '+ it))
+                    def poi = new Poi(name: 'poi ' + it + grp.id, desc: 'desc ' + it, user: adminInstance,
+                            lat: '12', lng: '13')
+                            .addToImages('testeee ' + it)
                     grp.addToPois(poi).save()
                 }
 

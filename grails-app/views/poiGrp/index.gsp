@@ -42,7 +42,7 @@
                                     </g:each>
                                 </ul>
                                 </td>
-                                <td>${poiGrp.image?.fileName}</td>
+                                <td>${poiGrp.image}</td>
                                 </tr>
                             </g:each>
                             </tbody>

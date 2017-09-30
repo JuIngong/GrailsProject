@@ -39,7 +39,7 @@ class PoiController {
             return
         }
 
-        if(poi.user.id != springSecurityService.getCurrentUser().id){
+        if (poi.user.id != springSecurityService.getCurrentUser().id) {
             poi.user = User.get(springSecurityService.getCurrentUser().id)
         }
 
@@ -72,6 +72,14 @@ class PoiController {
             respond poi.errors, view: 'edit'
             return
         }
+
+        if (poi.user.id != springSecurityService.getCurrentUser().id) {
+            poi.user = User.get(springSecurityService.getCurrentUser().id)
+        }
+
+
+        poiService.updatePoiToPoiGrp(poi, params.poiGrp)
+
 
         poi.save flush: true
 

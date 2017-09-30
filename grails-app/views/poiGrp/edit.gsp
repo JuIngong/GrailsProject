@@ -32,7 +32,7 @@
             <div class="form-group">
                 <label for="image">Image</label>
 
-                <p>${poiGrp.image?.fileName}</p>
+                <p>${poiGrp?.image}</p>
                 <input id="image" type="file">
             </div>
 

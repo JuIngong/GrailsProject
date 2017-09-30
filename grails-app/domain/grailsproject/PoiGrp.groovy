@@ -3,7 +3,7 @@ package grailsproject
 class PoiGrp {
 
     String name
-    Image image
+    String image
 
     static hasMany = [pois:Poi]
 

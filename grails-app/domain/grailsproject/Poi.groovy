@@ -10,7 +10,7 @@ class Poi {
     Date dateCreated
     Date lastUpdated
 
-    static hasMany = [images:Image, poiGrp:PoiGrp]
+    static hasMany = [images:String, poiGrp:PoiGrp]
     static belongsTo = PoiGrp
 
     static constraints = {

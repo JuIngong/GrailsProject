@@ -22,7 +22,7 @@
         </ul>
     </g:hasErrors>
     <div class="col-lg-4">
-        <g:form resource="${this.poiGrp}" method="POST">
+        <g:uploadForm resource="${this.poiGrp}" method="POST">
 
             <div class="form-group">
                 <label for="name">Nom</label>
@@ -31,7 +31,7 @@
 
             <div class="form-group">
                 <label for="image">Image</label>
-                <input id="image" type="file">
+                <input id="image" type="file" name="imageGrp" accept=".jpg, .jpeg, .png">
             </div>
 
             <div class="form-group">
@@ -40,15 +40,15 @@
                           from="${Poi.list()}"
                           optionValue="name"
                           optionKey="id"
-                          multiple="true" />
+                          multiple="true"/>
             </div>
 
             <div class="form-group">
-            <g:submitButton name="create" class="save btn btn-primary"
-                            value="${message(code: 'default.button.create.label', default: 'Create')}"/>
+                <g:submitButton name="create" class="save btn btn-primary"
+                                value="${message(code: 'default.button.create.label', default: 'Create')}"/>
             </div>
 
-        </g:form>
+        </g:uploadForm>
     </div>
 </div>
 </body>

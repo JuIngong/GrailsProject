@@ -5,7 +5,13 @@ import grails.gorm.transactions.Transactional
 @Transactional
 class PoiGrpService {
 
-    def serviceMethod() {
-
+    @Transactional
+    PoiGrp updateFeaturedImageUrl(Long id, String featuredImageUrl) {
+        PoiGrp poiGrp = PoiGrp.get(id)
+        if ( !poiGrp ) {
+            return null
+        }
+        poiGrp.image = featuredImageUrl
+        poiGrp.save(flush:true)
     }
 }
