@@ -22,7 +22,7 @@ class BootStrap {
             listPoiGrp.each { PoiGrp grp ->
                 (1..5).each {
                     def poi = new Poi(name: 'poi ' + it + grp.id, desc: 'desc ' + it, user: adminInstance,
-                            lat: '12', lng: '13')
+                            lat: '12.0'+it, lng: '13.0'+it)
                             .addToImages('testeee ' + it)
                     grp.addToPois(poi).save()
                 }
