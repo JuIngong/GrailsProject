@@ -31,13 +31,24 @@ class PoiService {
     @Transactional
     Poi updateFeaturedImageUrl(Long id, List<String> featuredImageUrl) {
         Poi poi = Poi.get(id)
-        if ( !poi ) {
+        if (!poi) {
             return null
         }
         featuredImageUrl.each {
             poi.addToImages(it)
         }
 
-        poi.save(flush:true)
+        poi.save(flush: true)
+    }
+
+    @Transactional
+    Poi delFeaturedImageUrl(Long id, String featuredImageUrl) {
+        Poi poi = Poi.get(id)
+        if (!poi) {
+            return null
+        }
+        poi.removeFromImages(featuredImageUrl)
+
+        poi.save(flush: true)
     }
 }

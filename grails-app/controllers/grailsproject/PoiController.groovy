@@ -12,7 +12,7 @@ class PoiController {
     def poiService
     def uploadImageService
 
-    static allowedMethods = [save: "POST", update: ["PUT", "POST"], delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: ["PUT", "POST"], delete: "DELETE", deleteImg: "POST"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -106,6 +106,26 @@ class PoiController {
                 redirect poi
             }
             '*' { respond poi, [status: OK] }
+        }
+    }
+
+    @Transactional
+    def deleteImg(Poi poi) {
+        if (poi == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+        println params
+
+        uploadImageService.delPoiImage(poi, params.imgs)
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'poi.label', default: 'Poi'), params.imgs])
+                redirect action: "edit", method: "GET", id: poi.id
+            }
+            '*' { render status: NO_CONTENT }
         }
     }
 

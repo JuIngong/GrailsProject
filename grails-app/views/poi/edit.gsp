@@ -11,7 +11,7 @@
 <div id="edit-poi" class="col-lg-12" role="main">
     <h1 class="page-header"><g:message code="default.edit.label" args="[entityName]"/></h1>
     <g:if test="${flash.message}">
-        <div class="message" role="status">${flash.message}</div>
+        <div class="message alert alert-success" role="status">${flash.message}</div>
     </g:if>
     <g:hasErrors bean="${this.poi}">
         <ul class="errors" role="alert">
@@ -23,7 +23,7 @@
     </g:hasErrors>
 
     <div class="col-lg-4">
-        <g:form resource="${this.poi}" enctype="multipart/form-data"  method="POST">
+        <g:form resource="${this.poi}" enctype="multipart/form-data" method="POST">
             <g:hiddenField name="version" value="${this.poi?.version}"/>
 
             <div class="form-group">
@@ -37,10 +37,15 @@
             </div>
 
             <div class="form-group">
+                <g:hiddenField id="imgs" name="imgs" value=""/>
                 <label for="image">Images</label>
                 <g:each in="${poi.images}" var="imgs">
                     <p><img src="${path + "/poi" + poi.id + "/" + imgs}" class="img-rounded" height="150"></p>
-                    <p>${imgs}</p>
+
+                    <p>${imgs} <g:actionSubmit class="delete btn btn-danger" action="deleteImg"
+                                               value="${message(code: 'default.button.delete.label', default: 'Delete')}"
+                                               onclick="setHiddenField('${imgs}')"/>
+                    </p>
                 </g:each>
                 <input id="image" type="file" name="imagesPoi" accept=".jpg, .jpeg, .png" multiple>
             </div>
@@ -107,6 +112,14 @@
         var form = $("form")[0];
         form.action = form.action.replace('save', 'update');
     });
+</g:javascript>
+<g:javascript>
+function setHiddenField(img) {
+    var im = document.getElementById("imgs");
+    console.log('test');
+    im.value = img;
+    return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');
+}
 
 </g:javascript>
 <script type="text/javascript"
