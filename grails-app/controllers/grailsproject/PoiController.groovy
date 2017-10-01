@@ -116,8 +116,6 @@ class PoiController {
             notFound()
             return
         }
-        println params
-
         uploadImageService.delPoiImage(poi, params.imgs)
 
         request.withFormat {
@@ -138,6 +136,8 @@ class PoiController {
         }
 
         poiService.delAllPoiToPoiGrp(poi)
+
+        uploadImageService.delAllPoiImage(poi)
 
         poi.delete flush: true
 

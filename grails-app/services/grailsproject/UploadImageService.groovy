@@ -5,7 +5,7 @@ import grails.core.support.GrailsConfigurationAware
 import grails.gorm.transactions.Transactional
 
 @Transactional
-class UploadImageService implements GrailsConfigurationAware{
+class UploadImageService implements GrailsConfigurationAware {
 
     def poiGrpService
     def poiService
@@ -27,7 +27,7 @@ class UploadImageService implements GrailsConfigurationAware{
         }
         def folderPath = "${cdnFolder}/poi${poi.id}" as String
         def folder = new File(folderPath)
-        if ( !folder.exists() ) {
+        if (!folder.exists()) {
             folder.mkdirs()
         }
 
@@ -38,7 +38,7 @@ class UploadImageService implements GrailsConfigurationAware{
 
         def p = poiService.updateFeaturedImageUrl(poi.id, filename)
 
-        if ( !p || p.hasErrors() ) {
+        if (!p || p.hasErrors()) {
             def f = new File(path)
             f.delete()
         }
@@ -52,7 +52,7 @@ class UploadImageService implements GrailsConfigurationAware{
 
         def poiI = poiService.delFeaturedImageUrl(poi.id, image)
 
-        if ( !poiI.hasErrors() ) {
+        if (!poiI.hasErrors()) {
             def f = new File("${folderPath}/${image}")
             f.delete()
         }
@@ -60,7 +60,30 @@ class UploadImageService implements GrailsConfigurationAware{
         poiI
     }
 
+    @SuppressWarnings('JavaIoPackageAccess')
+    delAllPoiImage(Poi poi) {
 
+        def folderPath = "${cdnFolder}/poi${poi.id}" as String
+
+        poi.images.each {
+            def f = new File("${folderPath}/${it}")
+            f.delete()
+        }
+
+
+    }
+
+
+    @SuppressWarnings('JavaIoPackageAccess')
+    delPoiGrpImage(PoiGrp poigrp) {
+
+        def folderPath = "${cdnFolder}/poiGrp${poigrp.id}" as String
+
+        def f = new File("${folderPath}/${poigrp.image}")
+        f.delete()
+
+
+    }
 
     @SuppressWarnings('JavaIoPackageAccess')
     PoiGrp uploadPoiGrpImage(PoiGrp poiGrp, def image) {
@@ -68,7 +91,7 @@ class UploadImageService implements GrailsConfigurationAware{
         String filename = image.originalFilename
         def folderPath = "${cdnFolder}/poiGrp${poiGrp.id}" as String
         def folder = new File(folderPath)
-        if ( !folder.exists() ) {
+        if (!folder.exists()) {
             folder.mkdirs()
         }
         def path = "${folderPath}/${filename}" as String
@@ -76,7 +99,7 @@ class UploadImageService implements GrailsConfigurationAware{
 
         def poi = poiGrpService.updateFeaturedImageUrl(poiGrp.id, filename)
 
-        if ( !poi || poi.hasErrors() ) {
+        if (!poi || poi.hasErrors()) {
             def f = new File(path)
             f.delete()
         }

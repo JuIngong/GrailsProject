@@ -9,6 +9,13 @@ afficher sur une carte.
 
 ## Fonctionnalités
 
+### Images
+Les images sont stockés sur serveur apache sur un disponnible dans le application yml.  
+grails:  
+&nbsp;&nbsp;&nbsp;&nbsp; guides:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cdnFolder: C:\wamp64\www\images\grailsProject  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cdnRootUrl: http://localhost:8081/images/grailsProject
+
 ### Les permissions
 Les utilisateurs auront chacun un rôle qui 
 définiront leur niveau d’accès (administrateur / modérateur
@@ -46,8 +53,21 @@ On peut acceder à celle-ci en passant par le menu en haut à droite.
 Elle permet de modifier son nom d'utilisateur ainsi que son mot de passe.
  
 ### Les POIs
+##### Creation
+Selection des groupes de poi depuis une liste multiple permettant la recherche des élement la comprenant.  
+Selection de la localisation via un click sur la carte.  
+Selection de multiple image possible via control click dans la fenetre de selection.  
+
+##### Edition
+Possibilité de supprimé une image.
 
 ### Les groupes de POIs
+##### Creation
+Selection des pois depuis une liste multiple permettant la recherche des élements la comprenant.  
+ 
+##### Visualisation
+Affichage des pois sur la carte.  
+Les marqueurs des pois affichent, si on click dessus un lien vers celui ci ainsi que la description.
 
          
   

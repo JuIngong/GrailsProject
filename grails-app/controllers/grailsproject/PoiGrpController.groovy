@@ -99,6 +99,8 @@ class PoiGrpController {
             return
         }
 
+        uploadImageService.delPoiGrpImage(poiGrp)
+
         poiGrp.delete flush: true
 
         request.withFormat {
