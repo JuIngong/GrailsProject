@@ -12,7 +12,7 @@ class PoiController {
     def poiService
     def uploadImageService
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", update: ["PUT", "POST"], delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -91,6 +91,12 @@ class PoiController {
 
         poiService.updatePoiToPoiGrp(poi, params.poiGrp)
 
+
+        if (params.imagesPoi != "") {
+            uploadImageService.uploadPoiImage(poi, params.imagesPoi)
+        } else {
+            poiGrp.save(flush: true)
+        }
 
         poi.save flush: true
 

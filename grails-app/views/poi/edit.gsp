@@ -23,7 +23,7 @@
     </g:hasErrors>
 
     <div class="col-lg-4">
-        <g:form resource="${this.poi}" method="PUT">
+        <g:form resource="${this.poi}" enctype="multipart/form-data"  method="POST">
             <g:hiddenField name="version" value="${this.poi?.version}"/>
 
             <div class="form-group">
@@ -39,9 +39,10 @@
             <div class="form-group">
                 <label for="image">Images</label>
                 <g:each in="${poi.images}" var="imgs">
+                    <p><img src="${path + "/poi" + poi.id + "/" + imgs}" class="img-rounded" height="150"></p>
                     <p>${imgs}</p>
                 </g:each>
-                <input id="image" type="file">
+                <input id="image" type="file" name="imagesPoi" accept=".jpg, .jpeg, .png" multiple>
             </div>
 
             <div class="form-group">
@@ -100,6 +101,13 @@
 
 
     }
+</g:javascript>
+<g:javascript>
+    $(document).ready(function () {
+        var form = $("form")[0];
+        form.action = form.action.replace('save', 'update');
+    });
+
 </g:javascript>
 <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_h0NTkL2FJoMf1gtYmXyBDsQfLK4etwA&callback=initMap"></script>

@@ -60,11 +60,10 @@
     </div>
 </div>
 <g:javascript>
-       $(document).ready(function () {
-           var path = window.location.pathname;
-           var test = path.split('/');
-           $("form")[0].action =  '/' + test[1] + '/' + test[2] + '/update/' + test[4];
-       });
+    $(document).ready(function () {
+        var form = $("form")[0];
+        form.action = form.action.replace('save', 'update');
+    });
 
 </g:javascript>
 </body>

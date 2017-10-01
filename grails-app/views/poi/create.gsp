@@ -37,7 +37,7 @@
 
             <div class="form-group">
                 <label for="image">Image</label>
-                <input id="image" type="file" name="imagesPoi" multiple>
+                <input id="image" type="file" name="imagesPoi" accept=".jpg, .jpeg, .png" multiple>
             </div>
 
             <div class="form-group">
